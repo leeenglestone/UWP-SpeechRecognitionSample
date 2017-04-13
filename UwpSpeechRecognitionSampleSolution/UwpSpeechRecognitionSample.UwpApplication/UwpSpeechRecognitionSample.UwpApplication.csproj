@@ -116,6 +116,10 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Sounds\202575__sergeeo__xylophone-for-cartoon-3.wav" />
+    <Content Include="Sounds\202576__sergeeo__xylophone-for-cartoon-2.wav" />
+    <Content Include="Sounds\202577__sergeeo__xylophone-for-cartoon-1.wav" />
+    <Content Include="Sounds\202581__sergeeo__xylophone-for-cartoon-4.wav" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
