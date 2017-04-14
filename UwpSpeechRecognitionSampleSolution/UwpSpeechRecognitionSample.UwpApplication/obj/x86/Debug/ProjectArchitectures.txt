@@ -1,0 +1,1 @@
+C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\UwpSpeechRecognitionSample.UwpApplication.csproj;x86
