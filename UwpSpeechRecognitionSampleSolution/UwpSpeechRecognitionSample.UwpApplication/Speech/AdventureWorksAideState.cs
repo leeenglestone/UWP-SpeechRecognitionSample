@@ -1,6 +1,6 @@
 ﻿namespace UwpSpeechRecognitionSample.UwpApplication.Speech
 {
-    public enum AdventureWorksAideState
+    public enum AideState
     {
         Listening,
         Thinking,

@@ -132,15 +132,17 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
+            _typeNameTable = new string[4];
             _typeNameTable[0] = "UwpSpeechRecognitionSample.UwpApplication.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl";
 
-            _typeTable = new global::System.Type[3];
+            _typeTable = new global::System.Type[4];
             _typeTable[0] = typeof(global::UwpSpeechRecognitionSample.UwpApplication.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -176,6 +178,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
         }
 
         private object Activate_0_MainPage() { return new global::UwpSpeechRecognitionSample.UwpApplication.MainPage(); }
+        private object Activate_3_SpeechRecognitionControl() { return new global::UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -200,6 +203,13 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
 
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 3:   //  UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl
+                userType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_3_SpeechRecognitionControl;
+                userType.SetIsLocalType();
+                xamlType = userType;
                 break;
             }
             return xamlType;

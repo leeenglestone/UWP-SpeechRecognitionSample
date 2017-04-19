@@ -52,7 +52,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Speech
                 return;
 
             _continousSpeechRecognizer = new SpeechRecognizer();
-            _continousSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { "Adventure Works" }, "start"));
+            _continousSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { "Jasper" }, "start"));
             var result = await _continousSpeechRecognizer.CompileConstraintsAsync();
 
             if (result.Status != SpeechRecognitionResultStatus.Success)
@@ -69,8 +69,8 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Speech
                 return;
             }
 
-            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-            Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
+            //Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+            //Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
             _continousSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
             await _continousSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
@@ -98,32 +98,32 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Speech
             }
         }
 
-        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
-        {
-            if (!_listening && !_gamepadViewDown && args.VirtualKey == Windows.System.VirtualKey.GamepadView)
-            {
-                _gamepadViewDown = true;
-                _keyTimer.Start();
-            }
-        }
+        //private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        //{
+        //    if (!_listening && !_gamepadViewDown && args.VirtualKey == Windows.System.VirtualKey.GamepadView)
+        //    {
+        //        _gamepadViewDown = true;
+        //        _keyTimer.Start();
+        //    }
+        //}
 
 
-        private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
-        {
-            if (!_listening && args.VirtualKey == Windows.System.VirtualKey.Q)
-            {
-                if (Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down))
-                {
-                    WakeUpAndListen();
-                }
-            }
+        //private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        //{
+        //    if (!_listening && args.VirtualKey == Windows.System.VirtualKey.Q)
+        //    {
+        //        if (Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down))
+        //        {
+        //            WakeUpAndListen();
+        //        }
+        //    }
 
-            if (args.VirtualKey == Windows.System.VirtualKey.GamepadView)
-            {
-                _gamepadViewDown = false;
-                _keyTimer.Stop();
-            }
-        }
+        //    if (args.VirtualKey == Windows.System.VirtualKey.GamepadView)
+        //    {
+        //        _gamepadViewDown = false;
+        //        _keyTimer.Stop();
+        //    }
+        //}
 
         
         private void ContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)

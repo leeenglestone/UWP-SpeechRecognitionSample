@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UwpSpeechRecognitionSample.UwpApplication.Speech
+namespace UwpSpeechRecognitionSample.UwpApplication.Models
 {
-    class Class1
+    public class PageViewModel
     {
+        public int MyProperty { get; set; }
     }
 }
