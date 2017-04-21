@@ -5,9 +5,15 @@
     xmlns:local="using:UwpSpeechRecognitionSample.UwpApplication.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:UwpSpeechRecognitionSample.UwpApplication.Converters"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    Height="200"
+    Width="400">
+    <UserControl.Resources>
+        <converters:ListeningStateToTextConverter x:ConnectionId='1' x:Name="ListeningStateToTextConverter"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelTextStyle}" Text="Listening State" />
-        <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource ListeningStateTextStyle}" Text="{Binding Path=ListeningState, FallbackValue='[Listening State]'}" />
+        <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource ListeningStateTextStyle}" Text="{Binding Path=ListeningState, Converter={StaticResource ListeningStateToTextConverter}, FallbackValue='[Listening State]'}" />
 
         <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelTextStyle}" Text="Recognised Phrase" />
         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource RecognisedTextStyle}" Text="{Binding Path=RecognisedPhrase, FallbackValue='[Recognised Phrase]'}" />

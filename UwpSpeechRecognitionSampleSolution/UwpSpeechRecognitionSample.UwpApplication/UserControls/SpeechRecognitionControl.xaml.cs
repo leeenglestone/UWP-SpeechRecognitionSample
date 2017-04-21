@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.SpeechRecognition;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -19,6 +21,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UserControls
 {
     public sealed partial class SpeechRecognitionControl : UserControl
     {
+        private SpeechRecognizer _speechRecognizer;
+        private SpeechRecognizer _continousSpeechRecognizer;
+        private SpeechSynthesizer _speechSynthesizer;
+
         public SpeechRecognitionControl()
         {
             this.InitializeComponent();

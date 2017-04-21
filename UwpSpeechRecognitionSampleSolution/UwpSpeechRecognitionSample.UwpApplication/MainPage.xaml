@@ -5,6 +5,7 @@
     xmlns:local="using:UwpSpeechRecognitionSample.UwpApplication"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UserControls="using:UwpSpeechRecognitionSample.UwpApplication.UserControls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Dark">
@@ -19,6 +20,8 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Style="{StaticResource PageHeadingStyle}" Text="Heading"/>
+
+        <UserControls:SpeechRecognitionControl x:Name="SpeechRecognitionControl" Grid.Row="1" />
 
 
     </Grid>

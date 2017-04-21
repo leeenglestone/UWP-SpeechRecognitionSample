@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UwpSpeechRecognitionSample.UwpApplication.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,13 @@ namespace UwpSpeechRecognitionSample.UwpApplication
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public SpeechRecognitionViewModel ViewModel { get; set; } = new SpeechRecognitionViewModel();
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            SpeechRecognitionControl.DataContext = ViewModel;
         }
     }
 }

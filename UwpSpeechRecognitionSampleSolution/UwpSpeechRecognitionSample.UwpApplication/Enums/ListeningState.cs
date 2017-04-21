@@ -8,7 +8,9 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Enums
 {
     public enum ListeningState
     {
+        NotStarted,
         PassiveListening,
+        AnalysingSpeech,
         ActiveListening,
         Responding
     }
