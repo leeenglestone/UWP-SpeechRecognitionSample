@@ -7,6 +7,8 @@
     <RootPropertyPathName Name="ActionResult" />
     <RootPropertyPathName Name="RecognisedPhrase" />
     <RootPropertyPathName Name="ListeningState" />
+    <RootPropertyPathName Name="StartListeningButtonVisibility" />
+    <RootPropertyPathName Name="StopListeningButtonVisibility" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -62,10 +64,21 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="UwpSpeechRecognitionSample.UwpApplication.Converters.ListeningStateToTextConverter" />
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Children" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Path" />
       <RootProperty Name="FallbackValue" />
       <RootProperty Name="Converter" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Content" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Visibility" />
+      <RootEvent Name="Click" />
     </RootType>
   </Roots.RootTypes>
 </Roots>

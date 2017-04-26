@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UwpSpeechRecognitionSample.UwpApplication.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.SpeechRecognition;
@@ -28,6 +29,17 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UserControls
         public SpeechRecognitionControl()
         {
             this.InitializeComponent();
+        }
+
+        private void BtnStopListening_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as SpeechRecognitionViewModel).ListeningState = Enums.ListeningState.NotListening;
+        }
+
+        private void BtnStartListening_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as SpeechRecognitionViewModel).ListeningState = Enums.ListeningState.PassiveListening;
+
         }
     }
 }
