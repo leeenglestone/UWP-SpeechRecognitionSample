@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Converters\ListeningStateToTextConverter.cs" />
     <Compile Include="Enums\ListeningState.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
