@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using UwpSpeechRecognitionSample.UwpApplication.Enums;
-using UwpSpeechRecognitionSample.UwpApplication.Helpers;
 using Windows.Media.Capture;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Xaml;
@@ -34,7 +31,6 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
                     case ListeningState.PassiveListening:
                         StopListeningButtonVisibility = Visibility.Visible;
                         StartListeningButtonVisibility = Visibility.Collapsed;
-                        //_speechRecognizer.State = SpeechRecognizerState.
                         break;
 
                     case ListeningState.NotListening:
@@ -91,11 +87,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
 
             //_speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
             //await _speechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
-
-
         }
-
-
 
         private async Task<bool> CheckForMicrophonePermission()
         {

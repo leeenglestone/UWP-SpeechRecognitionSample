@@ -64,6 +64,13 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="UwpSpeechRecognitionSample.UwpApplication.Converters.ListeningStateToTextConverter" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Border">
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="CornerRadius" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Child" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Orientation" />
       <RootProperty Name="HorizontalAlignment" />
