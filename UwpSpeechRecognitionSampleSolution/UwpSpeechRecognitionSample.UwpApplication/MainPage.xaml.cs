@@ -30,6 +30,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication
             this.InitializeComponent();
 
             ViewModel.Initialize();
+
             SpeechRecognitionControl.DataContext = ViewModel;
         }
     }

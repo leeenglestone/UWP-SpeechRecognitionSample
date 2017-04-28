@@ -37,6 +37,11 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
                         StopListeningButtonVisibility = Visibility.Collapsed;
                         StartListeningButtonVisibility = Visibility.Visible;
                         break;
+
+                    case ListeningState.ActiveListening:
+                        StopListeningButtonVisibility = Visibility.Visible;
+                        StartListeningButtonVisibility = Visibility.Collapsed;
+                        break;
                 }
 
                 NotifyPropertyChanged();
@@ -59,13 +64,9 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         public Visibility StartListeningButtonVisibility { get { return _startListeningButtonVisibility; } set { _startListeningButtonVisibility = value; NotifyPropertyChanged(); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public async Task Initialize()
@@ -74,19 +75,24 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
                 return;
 
             _awakeSpeechRecognizer = new SpeechRecognizer();
-            _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { "Awake Commands" }, "start"));
+            _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { "Oracle" }, "Awake"));
+
             var result = await _awakeSpeechRecognizer.CompileConstraintsAsync();
 
             if (result.Status != SpeechRecognitionResultStatus.Success)
-            {
                 return;
-            }
 
-            _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
+            _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
             await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
 
-            //_speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
-            //await _speechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
+            _commandSpeechRecognizer = new SpeechRecognizer();
+            result = await _commandSpeechRecognizer.CompileConstraintsAsync();
+            _commandSpeechRecognizer.HypothesisGenerated += _commandSpeechRecognizer_HypothesisGenerated;
+        }
+
+        private void _commandSpeechRecognizer_HypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
+        {
+            Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => RecognisedPhrase = args.Hypothesis.Text.ToLower(), false);
         }
 
         private async Task<bool> CheckForMicrophonePermission()
@@ -112,31 +118,33 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             return true;
         }
 
-        private void ContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
+        private void AwakeContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
         {
             if (args.Result.Confidence == SpeechRecognitionConfidence.High || args.Result.Confidence == SpeechRecognitionConfidence.Medium)
             {
-                //Helpers.RunOnCoreDispatcherIfPossible(() => WakeUpAndListen(), false
                 Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => WakeUpAndListen(), false);
             }
         }
 
         private async Task WakeUpAndListen()
         {
-            await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
+            // Stop awake listener
+            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
 
-            ListeningState = ListeningState.AnalysingSpeech;
+            ListeningState = ListeningState.ActiveListening;
 
             // Do some stuff
+            // Start timer
+            //var timer = new DispatcherTimer();
+            //timer.
+            // Start command listener
+            // Stop timer
+            // Stop command listener
 
-            await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
+            // Start awake listener
+            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
 
-            ListeningState = ListeningState.PassiveListening;
-        }
-
-        private void _speechRecognizer_HypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
-        {
-            Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => RecognisedPhrase = args.Hypothesis.Text.ToLower(), false);
+            //ListeningState = ListeningState.PassiveListening;
         }
     }
 }
