@@ -15,6 +15,8 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         SpeechRecognizer _awakeSpeechRecognizer;
         SpeechRecognizer _commandSpeechRecognizer = new SpeechRecognizer();
 
+        DispatcherTimer _awakeTimer;
+
         private ListeningState _listeningState = ListeningState.PassiveListening;
         public ListeningState ListeningState
         {
@@ -135,8 +137,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
 
             // Do some stuff
             // Start timer
-            //var timer = new DispatcherTimer();
-            //timer.
+            _awakeTimer = new DispatcherTimer();
+            _awakeTimer.Interval = new TimeSpan(0, 0, 10);
+            _awakeTimer.Tick += _awakeTimer_Tick;
+            _awakeTimer.Start();
             // Start command listener
             // Stop timer
             // Stop command listener
@@ -145,6 +149,14 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             //await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
 
             //ListeningState = ListeningState.PassiveListening;
+        }
+
+        private void _awakeTimer_Tick(object sender, object e)
+        {
+            //throw new NotImplementedException();
+            _awakeTimer.Stop();
+            StopListeningButtonVisibility = Visibility.Collapsed;
+            StartListeningButtonVisibility = Visibility.Visible;
         }
     }
 }
