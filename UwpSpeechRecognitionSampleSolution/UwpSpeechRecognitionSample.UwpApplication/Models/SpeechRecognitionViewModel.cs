@@ -34,8 +34,8 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
                 switch (_listeningState)
                 {
                     case ListeningState.PassiveListening:
-                        StopListeningButtonVisibility = Visibility.Visible;
-                        StartListeningButtonVisibility = Visibility.Collapsed;
+                        StopListeningButtonVisibility = Visibility.Collapsed;
+                        StartListeningButtonVisibility = Visibility.Visible;
                         break;
 
                     case ListeningState.NotListening:
@@ -62,10 +62,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         private string _recognisedPhrase = string.Empty;
         public string RecognisedPhrase { get { return _recognisedPhrase; } set { _recognisedPhrase = value; NotifyPropertyChanged(); } }
 
-        private Visibility _stopListeningButtonVisibility = Visibility.Visible;
+        private Visibility _stopListeningButtonVisibility = Visibility.Collapsed;
         public Visibility StopListeningButtonVisibility { get { return _stopListeningButtonVisibility; } set { _stopListeningButtonVisibility = value; NotifyPropertyChanged(); } }
 
-        private Visibility _startListeningButtonVisibility = Visibility.Collapsed;
+        private Visibility _startListeningButtonVisibility = Visibility.Visible;
         public Visibility StartListeningButtonVisibility { get { return _startListeningButtonVisibility; } set { _startListeningButtonVisibility = value; NotifyPropertyChanged(); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -113,6 +113,36 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => RecognisedPhrase = args.Hypothesis.Text.ToLower(), false);
         }
 
+        
+        private void AwakeContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
+        {
+            if (args.Result.Confidence == SpeechRecognitionConfidence.High || args.Result.Confidence == SpeechRecognitionConfidence.Medium)
+            {
+                Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => WakeUpAndListen(), false);
+            }
+        }
+
+        private async Task WakeUpAndListen()
+        {
+            // Stop awake listener
+            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
+
+            ListeningState = ListeningState.ActiveListening;
+
+            // Start timer
+            _awakeTimer = new DispatcherTimer();
+            _awakeTimer.Interval = new TimeSpan(0, 0, 5);
+            _awakeTimer.Tick += _awakeTimer_Tick;
+            _awakeTimer.Start();
+        }
+
+        private void _awakeTimer_Tick(object sender, object e)
+        {
+            _awakeTimer.Stop();
+
+            ListeningState = ListeningState.PassiveListening;
+        }
+
         private async Task<bool> CheckForMicrophonePermission()
         {
             try
@@ -136,43 +166,5 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             return true;
         }
 
-        private void AwakeContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
-        {
-            if (args.Result.Confidence == SpeechRecognitionConfidence.High || args.Result.Confidence == SpeechRecognitionConfidence.Medium)
-            {
-                Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => WakeUpAndListen(), false);
-            }
-        }
-
-        private async Task WakeUpAndListen()
-        {
-            // Stop awake listener
-            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
-
-            ListeningState = ListeningState.ActiveListening;
-
-            // Do some stuff
-            // Start timer
-            _awakeTimer = new DispatcherTimer();
-            _awakeTimer.Interval = new TimeSpan(0, 0, 10);
-            _awakeTimer.Tick += _awakeTimer_Tick;
-            _awakeTimer.Start();
-            // Start command listener
-            // Stop timer
-            // Stop command listener
-
-            // Start awake listener
-            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
-
-            //ListeningState = ListeningState.PassiveListening;
-        }
-
-        private void _awakeTimer_Tick(object sender, object e)
-        {
-            //throw new NotImplementedException();
-            _awakeTimer.Stop();
-            StopListeningButtonVisibility = Visibility.Collapsed;
-            StartListeningButtonVisibility = Visibility.Visible;
-        }
     }
 }

@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="400"
-    Height="150"
+    Height="180"
     Width="400">
     
     <UserControl.Resources>
