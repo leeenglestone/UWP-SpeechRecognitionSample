@@ -28,6 +28,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -43,6 +44,10 @@
 
             <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelTextStyle}" Text="Action Result" />
             <TextBlock Grid.Column="1" Grid.Row="3" Style="{StaticResource ActionTextStyle}" Text="{Binding Path=ActionResult, FallbackValue='[Action Result]'}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource LabelTextStyle}" Text="Awake Phrase" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Style="{StaticResource ActionTextStyle}" Text="{Binding Path=AwakePhrase, FallbackValue='[Awake Phrase]'}" />
+
 
         </Grid>
 

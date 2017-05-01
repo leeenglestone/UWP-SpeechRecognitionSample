@@ -4,6 +4,7 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="AwakePhrase" />
     <RootPropertyPathName Name="ActionResult" />
     <RootPropertyPathName Name="RecognisedPhrase" />
     <RootPropertyPathName Name="ListeningState" />

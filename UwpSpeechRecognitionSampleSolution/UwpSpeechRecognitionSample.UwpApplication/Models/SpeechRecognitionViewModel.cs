@@ -17,6 +17,9 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
 
         DispatcherTimer _awakeTimer;
 
+        private string _awakePhrase = "Oracle";
+        public string AwakePhrase { get { return _awakePhrase; } set { _awakePhrase = value; NotifyPropertyChanged(); } }
+
         private ListeningState _listeningState = ListeningState.PassiveListening;
         public ListeningState ListeningState
         {
@@ -76,20 +79,33 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             if (!(await CheckForMicrophonePermission()))
                 return;
 
-            _awakeSpeechRecognizer = new SpeechRecognizer();
-            _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { "Oracle" }, "Awake"));
-
-            var result = await _awakeSpeechRecognizer.CompileConstraintsAsync();
-
-            if (result.Status != SpeechRecognitionResultStatus.Success)
+            var setupAwakeSpeechRecogniserResult = await SetupAwakeSpeechRecogniserAsync();
+            if (setupAwakeSpeechRecogniserResult.Status != SpeechRecognitionResultStatus.Success)
                 return;
 
+            var setupCommandSpeechRecogniserResult = await SetupCommandSpeechReconiserAsync();
+            if (setupCommandSpeechRecogniserResult.Status != SpeechRecognitionResultStatus.Success)
+                return;
+        }
+
+        private async Task<SpeechRecognitionCompilationResult> SetupAwakeSpeechRecogniserAsync()
+        {
+            _awakeSpeechRecognizer = new SpeechRecognizer();
+            _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { AwakePhrase }, "Awake"));
+
+            var result = await _awakeSpeechRecognizer.CompileConstraintsAsync();
+            return result;
+        }
+
+        private async Task<SpeechRecognitionCompilationResult> SetupCommandSpeechReconiserAsync()
+        {
             _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
             await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
 
             _commandSpeechRecognizer = new SpeechRecognizer();
-            result = await _commandSpeechRecognizer.CompileConstraintsAsync();
+            var result = await _commandSpeechRecognizer.CompileConstraintsAsync();
             _commandSpeechRecognizer.HypothesisGenerated += _commandSpeechRecognizer_HypothesisGenerated;
+            return result;
         }
 
         private void _commandSpeechRecognizer_HypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)

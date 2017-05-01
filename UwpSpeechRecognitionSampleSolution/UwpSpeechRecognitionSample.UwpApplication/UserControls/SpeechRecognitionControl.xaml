@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="400"
-    Height="150"
+    Height="180"
     Width="400">
     
     <UserControl.Resources>
@@ -24,6 +24,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -43,6 +44,10 @@
 
             <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelTextStyle}" Text="Action Result" />
             <TextBlock Grid.Column="1" Grid.Row="3" Style="{StaticResource ActionTextStyle}" Text="{Binding Path=ActionResult, FallbackValue='[Action Result]'}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource LabelTextStyle}" Text="Awake Phrase" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Style="{StaticResource ActionTextStyle}" Text="{Binding Path=AwakePhrase, FallbackValue='[Awake Phrase]'}" />
+
 
         </Grid>
 

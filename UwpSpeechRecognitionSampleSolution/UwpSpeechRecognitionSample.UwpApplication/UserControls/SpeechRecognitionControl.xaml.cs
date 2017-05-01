@@ -39,7 +39,6 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UserControls
         private void BtnStartListening_Click(object sender, RoutedEventArgs e)
         {
             (this.DataContext as SpeechRecognitionViewModel).ListeningState = Enums.ListeningState.PassiveListening;
-
         }
     }
 }
