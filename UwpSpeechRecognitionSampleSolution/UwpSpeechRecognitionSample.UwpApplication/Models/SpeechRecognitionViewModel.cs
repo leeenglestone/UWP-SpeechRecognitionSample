@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UwpSpeechRecognitionSample.UwpApplication.Enums;
+using UwpSpeechRecognitionSample.UwpApplication.EventArgs;
 using Windows.Media.Capture;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Xaml;
@@ -12,6 +13,8 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
 {
     public class SpeechRecognitionViewModel : INotifyPropertyChanged
     {
+        public EventHandler<PhraseRecognisedEventArgs> CommandPhraseRecognised;
+
         SpeechRecognizer _awakeSpeechRecognizer;
         SpeechRecognizer _commandSpeechRecognizer = new SpeechRecognizer();
 
@@ -86,6 +89,8 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             var setupCommandSpeechRecogniserResult = await SetupCommandSpeechReconiserAsync();
             if (setupCommandSpeechRecogniserResult.Status != SpeechRecognitionResultStatus.Success)
                 return;
+
+            ListeningState = ListeningState.PassiveListening;
         }
 
         private async Task<SpeechRecognitionCompilationResult> SetupAwakeSpeechRecogniserAsync()
@@ -111,6 +116,11 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         private void _commandSpeechRecognizer_HypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
         {
             Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => RecognisedPhrase = args.Hypothesis.Text.ToLower(), false);
+
+            var eventArgs = new PhraseRecognisedEventArgs();
+            eventArgs.RecognisedPhrase = args.Hypothesis.Text;
+
+            CommandPhraseRecognised(this, eventArgs);
         }
 
         

@@ -10,7 +10,7 @@
     d:DesignHeight="200"
     d:DesignWidth="400"
     Height="180"
-    Width="400">
+    Width="400" Loaded="UserControl_Loaded">
     
     <UserControl.Resources>
         <converters:ListeningStateToTextConverter x:Name="ListeningStateToTextConverter"/>
@@ -31,9 +31,11 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
+            <ProgressRing Grid.Column="0" Grid.Row="0" Foreground="Orange" Width="50" Height="50" IsActive="True"/>
+
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="BtnStopListening" Content="Stop Listening" Background="Red" Visibility="{Binding Path=StopListeningButtonVisibility}" Click="BtnStopListening_Click"/>
-                <Button x:Name="BtnStartListening" Content="Start Listening" Background="Green" Visibility="{Binding Path=StartListeningButtonVisibility}" Click="BtnStartListening_Click"/>
+                <Button x:Name="BtnStopListening" Content="Stop Active Listening" Background="Red" Visibility="{Binding Path=StopListeningButtonVisibility}" Click="BtnStopListening_Click"/>
+                <Button x:Name="BtnStartListening" Content="Start Active Listening" Background="Green" Visibility="{Binding Path=StartListeningButtonVisibility}" Click="BtnStartListening_Click"/>
             </StackPanel>
 
             <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelTextStyle}" Text="Listening State" />
