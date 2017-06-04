@@ -370,6 +370,9 @@
     <AppxPackagedFile Include="C:\Users\leeen\.nuget\packages\System.Xml.XmlSerializer\4.0.11\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognition.UserControlLibrary\bin\x86\Debug\UwpSpeechRecognition.UserControlLibrary.dll">
+      <PackagePath>UwpSpeechRecognition.UserControlLibrary.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
@@ -415,7 +418,7 @@
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\UwpSpeechRecognitionSample.UwpApplication.xr.xml">
       <PackagePath>UwpSpeechRecognitionSample.UwpApplication.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\resources.pri">

@@ -2139,6 +2139,13 @@
             "rid": "aot"
           }
         }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -4386,6 +4393,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     },
@@ -6674,6 +6688,13 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
@@ -8930,6 +8951,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     },
@@ -11227,6 +11255,13 @@
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
@@ -13483,6 +13518,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     },
@@ -15779,6 +15821,13 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3"
         }
       }
     }
@@ -21949,6 +21998,11 @@
         "ref/xamarinwatchos10/_._",
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
+    },
+    "UwpSpeechRecognition.UserControlLibrary/1.0.0": {
+      "type": "project",
+      "path": "../UwpSpeechRecognition.UserControlLibrary/UwpSpeechRecognition.UserControlLibrary.csproj",
+      "msbuildProject": "../UwpSpeechRecognition.UserControlLibrary/UwpSpeechRecognition.UserControlLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -21966,7 +22020,16 @@
       "projectName": "UwpSpeechRecognitionSample.UwpApplication",
       "projectPath": "C:\\Development\\UWP-SpeechRecognitionSample\\UwpSpeechRecognitionSampleSolution\\UwpSpeechRecognitionSample.UwpApplication\\UwpSpeechRecognitionSample.UwpApplication.csproj",
       "projectJsonPath": "C:\\Development\\UWP-SpeechRecognitionSample\\UwpSpeechRecognitionSampleSolution\\UwpSpeechRecognitionSample.UwpApplication\\project.json",
-      "projectStyle": "ProjectJson"
+      "projectStyle": "ProjectJson",
+      "frameworks": {
+        "uap10.0": {
+          "projectReferences": {
+            "C:\\Development\\UWP-SpeechRecognitionSample\\UwpSpeechRecognitionSampleSolution\\UwpSpeechRecognition.UserControlLibrary\\UwpSpeechRecognition.UserControlLibrary.csproj": {
+              "projectPath": "C:\\Development\\UWP-SpeechRecognitionSample\\UwpSpeechRecognitionSampleSolution\\UwpSpeechRecognition.UserControlLibrary\\UwpSpeechRecognition.UserControlLibrary.csproj"
+            }
+          }
+        }
+      }
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"

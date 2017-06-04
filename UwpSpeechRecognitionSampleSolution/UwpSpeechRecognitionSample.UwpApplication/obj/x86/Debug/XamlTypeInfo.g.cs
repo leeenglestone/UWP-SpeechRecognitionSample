@@ -132,23 +132,21 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[7];
-            _typeNameTable[0] = "UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl";
+            _typeNameTable = new string[6];
+            _typeNameTable[0] = "UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[2] = "UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel";
+            _typeNameTable[2] = "UwpSpeechRecognition.UserControlLibrary.SpeechRecognitionViewModel";
             _typeNameTable[3] = "Object";
             _typeNameTable[4] = "UwpSpeechRecognitionSample.UwpApplication.MainPage";
             _typeNameTable[5] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[6] = "UwpSpeechRecognitionSample.UwpApplication.Converters.ListeningStateToTextConverter";
 
-            _typeTable = new global::System.Type[7];
-            _typeTable[0] = typeof(global::UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl);
+            _typeTable = new global::System.Type[6];
+            _typeTable[0] = typeof(global::UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[2] = typeof(global::UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel);
+            _typeTable[2] = typeof(global::UwpSpeechRecognition.UserControlLibrary.SpeechRecognitionViewModel);
             _typeTable[3] = typeof(global::System.Object);
             _typeTable[4] = typeof(global::UwpSpeechRecognitionSample.UwpApplication.MainPage);
             _typeTable[5] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[6] = typeof(global::UwpSpeechRecognitionSample.UwpApplication.Converters.ListeningStateToTextConverter);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -183,10 +181,9 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
             return -1;
         }
 
-        private object Activate_0_SpeechRecognitionControl() { return new global::UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl(); }
-        private object Activate_2_SpeechRecognitionViewModel() { return new global::UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel(); }
+        private object Activate_0_SpeechRecognitionControl() { return new global::UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl(); }
+        private object Activate_2_SpeechRecognitionViewModel() { return new global::UwpSpeechRecognition.UserControlLibrary.SpeechRecognitionViewModel(); }
         private object Activate_4_MainPage() { return new global::UwpSpeechRecognitionSample.UwpApplication.MainPage(); }
-        private object Activate_6_ListeningStateToTextConverter() { return new global::UwpSpeechRecognitionSample.UwpApplication.Converters.ListeningStateToTextConverter(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -198,11 +195,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
             switch (typeIndex)
             {
 
-            case 0:   //  UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl
+            case 0:   //  UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl
                 userType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_0_SpeechRecognitionControl;
                 userType.AddMemberName("ViewModel");
-                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -210,10 +206,9 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
                 xamlType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 2:   //  UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel
+            case 2:   //  UwpSpeechRecognition.UserControlLibrary.SpeechRecognitionViewModel
                 userType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
-                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -224,20 +219,12 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
             case 4:   //  UwpSpeechRecognitionSample.UwpApplication.MainPage
                 userType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_4_MainPage;
-                userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 5:   //  Windows.UI.Xaml.Controls.Page
                 xamlType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 6:   //  UwpSpeechRecognitionSample.UwpApplication.Converters.ListeningStateToTextConverter
-                userType = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_6_ListeningStateToTextConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
                 break;
             }
             return xamlType;
@@ -246,18 +233,8 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
 
         private object get_0_SpeechRecognitionControl_ViewModel(object instance)
         {
-            var that = (global::UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl)instance;
+            var that = (global::UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl)instance;
             return that.ViewModel;
-        }
-        private object get_1_MainPage_ViewModel(object instance)
-        {
-            var that = (global::UwpSpeechRecognitionSample.UwpApplication.MainPage)instance;
-            return that.ViewModel;
-        }
-        private void set_1_MainPage_ViewModel(object instance, object Value)
-        {
-            var that = (global::UwpSpeechRecognitionSample.UwpApplication.MainPage)instance;
-            that.ViewModel = (global::UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel)Value;
         }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
@@ -267,17 +244,11 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_U
 
             switch (longMemberName)
             {
-            case "UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl.ViewModel":
-                userType = (global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType)GetXamlTypeByName("UwpSpeechRecognitionSample.UwpApplication.UserControls.SpeechRecognitionControl");
-                xamlMember = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlMember(this, "ViewModel", "UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel");
+            case "UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl.ViewModel":
+                userType = (global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType)GetXamlTypeByName("UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl");
+                xamlMember = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlMember(this, "ViewModel", "UwpSpeechRecognition.UserControlLibrary.SpeechRecognitionViewModel");
                 xamlMember.Getter = get_0_SpeechRecognitionControl_ViewModel;
                 xamlMember.SetIsReadOnly();
-                break;
-            case "UwpSpeechRecognitionSample.UwpApplication.MainPage.ViewModel":
-                userType = (global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlUserType)GetXamlTypeByName("UwpSpeechRecognitionSample.UwpApplication.MainPage");
-                xamlMember = new global::UwpSpeechRecognitionSample.UwpApplication.UwpSpeechRecognitionSample_UwpApplication_XamlTypeInfo.XamlMember(this, "ViewModel", "UwpSpeechRecognitionSample.UwpApplication.Models.SpeechRecognitionViewModel");
-                xamlMember.Getter = get_1_MainPage_ViewModel;
-                xamlMember.Setter = set_1_MainPage_ViewModel;
                 break;
             }
             return xamlMember;

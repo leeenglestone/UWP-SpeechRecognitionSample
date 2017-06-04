@@ -1,1 +1,2 @@
+C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognition.UserControlLibrary\UwpSpeechRecognition.UserControlLibrary.csproj;x86
 C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\UwpSpeechRecognitionSample.UwpApplication.csproj;x86

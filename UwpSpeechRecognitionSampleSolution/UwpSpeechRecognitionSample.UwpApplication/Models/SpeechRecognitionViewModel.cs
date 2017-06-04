@@ -16,7 +16,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         public EventHandler<PhraseRecognisedEventArgs> CommandPhraseRecognised;
 
         SpeechRecognizer _awakeSpeechRecognizer;
-        SpeechRecognizer _commandSpeechRecognizer;// = new SpeechRecognizer();
+        SpeechRecognizer _commandSpeechRecognizer;
 
         DispatcherTimer _awakeTimer;
 
@@ -133,7 +133,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             //CommandPhraseRecognised(this, eventArgs);
         }
 
-        
+
         private void AwakeContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
         {
             if (args.Result.Confidence == SpeechRecognitionConfidence.High || args.Result.Confidence == SpeechRecognitionConfidence.Medium)
@@ -152,7 +152,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             ListeningState = ListeningState.ActiveListening;
 
             // Start timer
-            
+
             _awakeTimer.Start();
         }
 

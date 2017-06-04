@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UwpSpeechRecognitionSample.UwpApplication.Enums;
+using UwpSpeechRecognition.UserControlLibrary.Enums;
 using Windows.UI.Xaml.Data;
 
 namespace UwpSpeechRecognitionSample.UwpApplication.Converters

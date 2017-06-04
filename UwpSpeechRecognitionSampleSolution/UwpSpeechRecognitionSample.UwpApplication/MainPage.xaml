@@ -5,8 +5,8 @@
     xmlns:local="using:UwpSpeechRecognitionSample.UwpApplication"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:UserControls="using:UwpSpeechRecognitionSample.UwpApplication.UserControls"
-    mc:Ignorable="d">
+    xmlns:UserControls="using:UwpSpeechRecognition.UserControlLibrary.Controls"
+    mc:Ignorable="d" Loaded="Page_Loaded">
 
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Dark">
