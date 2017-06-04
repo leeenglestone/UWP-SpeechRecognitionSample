@@ -56,7 +56,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.UserControls
 
         public void RecognisedPhraseEvent(object sender, PhraseRecognisedEventArgs  args)
         {
-            ViewModel.RecognisedPhrase = args.RecognisedPhrase;
+            ViewModel.RecognisedPhrase += args.RecognisedPhrase;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         public EventHandler<PhraseRecognisedEventArgs> CommandPhraseRecognised;
 
         SpeechRecognizer _awakeSpeechRecognizer;
-        SpeechRecognizer _commandSpeechRecognizer = new SpeechRecognizer();
+        SpeechRecognizer _commandSpeechRecognizer;// = new SpeechRecognizer();
 
         DispatcherTimer _awakeTimer;
 
@@ -86,9 +86,13 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             if (setupAwakeSpeechRecogniserResult.Status != SpeechRecognitionResultStatus.Success)
                 return;
 
-            var setupCommandSpeechRecogniserResult = await SetupCommandSpeechReconiserAsync();
+            var setupCommandSpeechRecogniserResult = await SetupCommandSpeechRecogniserAsync();
             if (setupCommandSpeechRecogniserResult.Status != SpeechRecognitionResultStatus.Success)
                 return;
+
+            _awakeTimer = new DispatcherTimer();
+            _awakeTimer.Interval = new TimeSpan(0, 0, 5);
+            _awakeTimer.Tick += _awakeTimer_Tick;
 
             ListeningState = ListeningState.PassiveListening;
         }
@@ -102,7 +106,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             return result;
         }
 
-        private async Task<SpeechRecognitionCompilationResult> SetupCommandSpeechReconiserAsync()
+        private async Task<SpeechRecognitionCompilationResult> SetupCommandSpeechRecogniserAsync()
         {
             _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
             await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
@@ -110,7 +114,13 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             _commandSpeechRecognizer = new SpeechRecognizer();
             var result = await _commandSpeechRecognizer.CompileConstraintsAsync();
             _commandSpeechRecognizer.HypothesisGenerated += _commandSpeechRecognizer_HypothesisGenerated;
+            _commandSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += _commandSpeechRecognizer_ResultGenerated;
             return result;
+        }
+
+        private void _commandSpeechRecognizer_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
+        {
+            //throw new NotImplementedException();
         }
 
         private void _commandSpeechRecognizer_HypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
@@ -120,7 +130,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             var eventArgs = new PhraseRecognisedEventArgs();
             eventArgs.RecognisedPhrase = args.Hypothesis.Text;
 
-            CommandPhraseRecognised(this, eventArgs);
+            //CommandPhraseRecognised(this, eventArgs);
         }
 
         
@@ -135,14 +145,14 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
         private async Task WakeUpAndListen()
         {
             // Stop awake listener
-            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
+            await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
+
+            await _commandSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
 
             ListeningState = ListeningState.ActiveListening;
 
             // Start timer
-            _awakeTimer = new DispatcherTimer();
-            _awakeTimer.Interval = new TimeSpan(0, 0, 5);
-            _awakeTimer.Tick += _awakeTimer_Tick;
+            
             _awakeTimer.Start();
         }
 
@@ -151,6 +161,24 @@ namespace UwpSpeechRecognitionSample.UwpApplication.Models
             _awakeTimer.Stop();
 
             ListeningState = ListeningState.PassiveListening;
+
+            try
+            {
+                Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => _commandSpeechRecognizer.ContinuousRecognitionSession.CancelAsync(), false);
+            }
+            catch { }
+
+            Task.Delay(TimeSpan.FromSeconds(2)).Wait();
+
+            try
+            {
+
+                Helpers.Helpers.RunOnCoreDispatcherIfPossible(() => _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default), false);
+            }
+            catch { }
+
+            Task.Delay(TimeSpan.FromSeconds(2)).Wait();
+
         }
 
         private async Task<bool> CheckForMicrophonePermission()

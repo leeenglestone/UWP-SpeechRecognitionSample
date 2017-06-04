@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-06-02T19:45:43.977</Modified>
+      <Modified>2017-06-04T12:23:31.692</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\UwpSpeechRecognitionSample.UwpApplication.exe">
       <PackagePath>entrypoint\UwpSpeechRecognitionSample.UwpApplication.exe</PackagePath>
-      <Modified>2017-06-02T19:45:41.494</Modified>
+      <Modified>2017-06-04T12:23:31.010</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\leeen\.nuget\packages\Microsoft.CSharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -560,11 +560,11 @@
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-06-02T19:45:43.624</Modified>
+      <Modified>2017-06-04T12:23:31.469</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\Core\UwpSpeechRecognitionSample.UwpApplication.exe">
       <PackagePath>UwpSpeechRecognitionSample.UwpApplication.exe</PackagePath>
-      <Modified>2017-06-02T19:45:43.962</Modified>
+      <Modified>2017-06-04T12:23:31.688</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
