@@ -22,7 +22,7 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
         SpeechRecognizer _awakeSpeechRecognizer;
         SpeechRecognizer _commandSpeechRecognizer;
 
-        DispatcherTimer _awakeTimer;
+        DispatcherTimer _activeListeningTimer;
 
         private string _awakePhrase = "Oracle";
         public string AwakePhrase { get { return _awakePhrase; } set { _awakePhrase = value; NotifyPropertyChanged(); } }
@@ -101,26 +101,38 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
             if (setupCommandSpeechRecogniserResult.Status != SpeechRecognitionResultStatus.Success)
                 return;
 
-            _awakeTimer = new DispatcherTimer();
-            _awakeTimer.Interval = new TimeSpan(0, 0, 5);
-            _awakeTimer.Tick += _awakeTimer_Tick;
+            SetupActiveListeningTimer();
 
-            ListeningState = ListeningState.PassiveListening;
+            //ListeningState = ListeningState.PassiveListening;
+        }
+
+        private void SetupActiveListeningTimer()
+        {
+            _activeListeningTimer = new DispatcherTimer();
+            _activeListeningTimer.Interval = new TimeSpan(0, 0, 5);
+            _activeListeningTimer.Tick += _activeListeningTimer_Tick;
         }
 
         private async Task<SpeechRecognitionCompilationResult> SetupAwakeSpeechRecogniserAsync()
         {
             _awakeSpeechRecognizer = new SpeechRecognizer();
-            _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { AwakePhrase }, "Awake"));
 
+            _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { AwakePhrase }, "Awake"));
             var result = await _awakeSpeechRecognizer.CompileConstraintsAsync();
+
+            _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
+            await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
+
+            ListeningState = ListeningState.PassiveListening;
+            PassiveListeningStartedEvent(this, null);
+
             return result;
         }
 
         private async Task<SpeechRecognitionCompilationResult> SetupCommandSpeechRecogniserAsync()
         {
-            _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
-            await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
+            //_awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
+            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
 
             _commandSpeechRecognizer = new SpeechRecognizer();
 
@@ -166,17 +178,22 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
             ListeningState = ListeningState.ActiveListening;
 
-            _awakeTimer.Start();
+            PassiveListeningStoppedEvent(this, null);
+            ActiveListeningStartedEvent(this, null);
+
+            _activeListeningTimer.Start();
         }
 
-        private void _awakeTimer_Tick(object sender, object e)
+        private void _activeListeningTimer_Tick(object sender, object e)
         {
-            _awakeTimer.Stop();
+            _activeListeningTimer.Stop();
 
             ListeningState = ListeningState.PassiveListening;
 
             try
             {
+                ActiveListeningStoppedEvent(this, null);
+
                 Helpers.UiHelper.RunOnCoreDispatcherIfPossible(() => _commandSpeechRecognizer.ContinuousRecognitionSession.CancelAsync(), false);
             }
             catch { }
@@ -185,8 +202,9 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
             try
             {
-
+                PassiveListeningStartedEvent(this, null);
                 Helpers.UiHelper.RunOnCoreDispatcherIfPossible(() => _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default), false);
+
             }
             catch { }
 

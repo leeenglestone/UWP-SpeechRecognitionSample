@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UwpSpeechRecognition.UserControlLibrary;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,7 +31,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication
 
             this.SpeechRecognitionControl.PhraseRecognisedEvent += SpeechRecognitionControl_PhraseRecognisedEvent;
 
-            this.SpeechRecognitionControl.PassiveListeningStartedEvent += SpeechRecognitionControl_PassiveListeningStartedEvent;
+            this.SpeechRecognitionControl.PassiveListeningStartedEvent += SpeechRecognitionControl_PassiveListeningStartedEventAsync;
             this.SpeechRecognitionControl.PassiveListeningStoppedEvent += SpeechRecognitionControl_PassiveListeningStoppedEvent;
 
             this.SpeechRecognitionControl.ActiveListeningStartedEvent += SpeechRecognitionControl_ActiveListeningStartedEvent;
@@ -39,27 +40,25 @@ namespace UwpSpeechRecognitionSample.UwpApplication
 
         private void SpeechRecognitionControl_ActiveListeningStoppedEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void SpeechRecognitionControl_ActiveListeningStartedEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void SpeechRecognitionControl_PassiveListeningStoppedEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
-        private void SpeechRecognitionControl_PassiveListeningStartedEvent(object sender, EventArgs e)
+        private async void SpeechRecognitionControl_PassiveListeningStartedEventAsync(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var dialog = new MessageDialog("Passive Listening Started");
+            await dialog.ShowAsync();
         }
 
         private void SpeechRecognitionControl_PhraseRecognisedEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

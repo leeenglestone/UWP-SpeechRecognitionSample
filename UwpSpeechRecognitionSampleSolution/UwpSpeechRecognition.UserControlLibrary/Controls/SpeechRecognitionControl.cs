@@ -32,17 +32,21 @@ namespace UwpSpeechRecognition.UserControlLibrary.Controls
             }
         }
 
-        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
+        public SpeechRecognitionControl()
         {
-            await (this.DataContext as SpeechRecognitionViewModel).Initialize();
+            this.Loaded += SpeechRecognitionControl_Loaded;
+        }
+
+        private void SpeechRecognitionControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //ViewModel.Initialize();
 
             ViewModel.CommandPhraseRecognised += RecognisedPhraseEvent;
-
-            // Hookup view model events for stop/starting listening
             ViewModel.ActiveListeningStartedEvent += ViewModel_ActiveListeningStartedEvent;
             ViewModel.ActiveListeningStoppedEvent += ViewModel_ActiveListeningStoppedEvent;
             ViewModel.PassiveListeningStartedEvent += ViewModel_PassiveListeningStartedEvent;
             ViewModel.PassiveListeningStoppedEvent += ViewModel_PassiveListeningStoppedEvent;
+
         }
 
         private void ViewModel_PassiveListeningStoppedEvent(object sender, System.EventArgs e)
