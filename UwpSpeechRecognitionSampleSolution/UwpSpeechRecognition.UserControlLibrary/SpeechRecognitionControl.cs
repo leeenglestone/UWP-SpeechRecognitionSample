@@ -33,7 +33,9 @@ namespace UwpSpeechRecognition.UserControlLibrary.Controls
 
             ViewModel.CommandPhraseRecognised += RecognisedPhraseEvent;
             
+            
             // Hookup view model events for stop/starting listening
+            
         }
 
         public void RecognisedPhraseEvent(object sender, PhraseRecognisedEventArgs args)

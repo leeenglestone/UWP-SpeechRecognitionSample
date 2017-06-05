@@ -16,6 +16,10 @@ namespace UwpSpeechRecognition.UserControlLibrary
     public class SpeechRecognitionViewModel : INotifyPropertyChanged
     {
         public EventHandler<PhraseRecognisedEventArgs> CommandPhraseRecognised;
+        public event EventHandler ActiveListeningStartedEvent;
+        public event EventHandler ActiveListeningStoppedEvent;
+        public event EventHandler PassiveListeningStartedEvent;
+        public event EventHandler PassiveListeningStoppedEvent;
 
         SpeechRecognizer _awakeSpeechRecognizer;
         SpeechRecognizer _commandSpeechRecognizer;
