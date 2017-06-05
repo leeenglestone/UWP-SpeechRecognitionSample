@@ -106,12 +106,13 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helpers.cs" />
-    <Compile Include="ListeningState.cs" />
-    <Compile Include="PhraseRecognisedEventArgs.cs" />
-    <Compile Include="SpeechRecognitionControl.cs" />
+    <Compile Include="Converters\ListeningStateToTextConverter.cs" />
+    <Compile Include="Helpers\UiHelper.cs" />
+    <Compile Include="Enums\ListeningState.cs" />
+    <Compile Include="EventArgs\PhraseRecognisedEventArgs.cs" />
+    <Compile Include="Controls\SpeechRecognitionControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpeechRecognitionViewModel.cs" />
+    <Compile Include="Models\SpeechRecognitionViewModel.cs" />
     <EmbeddedResource Include="Properties\UwpSpeechRecognition.UserControlLibrary.rd.xml" />
   </ItemGroup>
   <ItemGroup>

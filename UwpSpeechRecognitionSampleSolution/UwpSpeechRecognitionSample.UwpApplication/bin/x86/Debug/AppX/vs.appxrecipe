@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>9920FA721F36D4A8BD8F684E8D00893AEB82665B7F5EFBEC7BF92AF8B6DCB360</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>0587A1F7A1D3588B6596B831D05D97EB3E2DBD927E4EB235E8B83BCF5E4EBE32</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>33fcd974-0925-4f7e-96c5-ddacf6ef7d59_1.0.0.0_x86__g5kqddr96fmn2</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>33fcd974-0925-4f7e-96c5-ddacf6ef7d59_g5kqddr96fmn2!App</RegisteredUserModeAppID>
     <RegisteredPackageID>33fcd974-0925-4f7e-96c5-ddacf6ef7d59</RegisteredPackageID>
@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-06-04T12:23:31.692</Modified>
+      <Modified>2017-06-05T19:46:54.396</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\UwpSpeechRecognitionSample.UwpApplication.exe">
       <PackagePath>entrypoint\UwpSpeechRecognitionSample.UwpApplication.exe</PackagePath>
-      <Modified>2017-06-04T12:23:31.010</Modified>
+      <Modified>2017-06-05T19:46:40.874</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\leeen\.nuget\packages\Microsoft.CSharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -495,6 +495,10 @@
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
       <Modified>2016-06-11T22:15:04.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognition.UserControlLibrary\bin\x86\Debug\UwpSpeechRecognition.UserControlLibrary.dll">
+      <PackagePath>UwpSpeechRecognition.UserControlLibrary.dll</PackagePath>
+      <Modified>2017-06-05T19:46:38.630</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2017-04-12T20:30:29.948</Modified>
@@ -551,20 +555,20 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\UwpSpeechRecognitionSample.UwpApplication.xr.xml">
       <PackagePath>UwpSpeechRecognitionSample.UwpApplication.xr.xml</PackagePath>
-      <Modified>2017-06-02T19:45:41.205</Modified>
+      <Modified>2017-06-04T21:23:24.276</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
-      <Modified>2017-04-28T09:09:09.413</Modified>
+      <Modified>2017-04-28T09:09:59.114</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-06-04T12:23:31.469</Modified>
+      <Modified>2017-06-05T19:46:54.155</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Development\UWP-SpeechRecognitionSample\UwpSpeechRecognitionSampleSolution\UwpSpeechRecognitionSample.UwpApplication\bin\x86\Debug\Core\UwpSpeechRecognitionSample.UwpApplication.exe">
       <PackagePath>UwpSpeechRecognitionSample.UwpApplication.exe</PackagePath>
-      <Modified>2017-06-04T12:23:31.688</Modified>
+      <Modified>2017-06-05T19:46:54.392</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

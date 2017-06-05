@@ -23,13 +23,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //public SpeechRecognitionViewModel ViewModel { get; set; } = new SpeechRecognitionViewModel();
 
         public MainPage()
         {
             this.InitializeComponent();
-
-            //SpeechRecognitionControl.DataContext = ViewModel;
 
             this.SpeechRecognitionControl.PhraseRecognisedEvent += SpeechRecognitionControl_PhraseRecognisedEvent;
 
@@ -67,8 +64,6 @@ namespace UwpSpeechRecognitionSample.UwpApplication
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.SpeechRecognitionControl.AddPhrases(new string[] { "" } );
-
             this.SpeechRecognitionControl.Initialise();
         }
     }
