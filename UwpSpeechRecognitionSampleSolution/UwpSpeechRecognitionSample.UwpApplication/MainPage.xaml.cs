@@ -1,5 +1,6 @@
 ﻿using System;
 using UwpSpeechRecognition.UserControlLibrary.EventArgs;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -61,6 +62,18 @@ namespace UwpSpeechRecognitionSample.UwpApplication
             this.SpeechRecognitionControl.Initialise();
 
             this.DataContext = this.SpeechRecognitionControl.ViewModel;
+
+            Speak();
+
+        }
+
+        private async void Speak()
+        {
+            MediaElement mediaElement = this.mediaElement;
+            var _speechSynthesizer = new SpeechSynthesizer();
+            SpeechSynthesisStream stream = await _speechSynthesizer.SynthesizeTextToStreamAsync("Initialising speech synthesis");
+            mediaElement.SetSource(stream, stream.ContentType);
+            mediaElement.Play();
         }
     }
 }

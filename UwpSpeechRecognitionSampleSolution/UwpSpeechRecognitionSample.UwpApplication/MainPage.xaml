@@ -27,6 +27,8 @@
                    HorizontalAlignment="Center" FontSize="30" />
             <TextBlock Foreground="White" Text="{Binding ListeningState, FallbackValue='[ListeningState]'}" 
                    HorizontalAlignment="Center" FontSize="30" />
+
+            <MediaElement x:Name="mediaElement"/>
         </StackPanel>
         
         

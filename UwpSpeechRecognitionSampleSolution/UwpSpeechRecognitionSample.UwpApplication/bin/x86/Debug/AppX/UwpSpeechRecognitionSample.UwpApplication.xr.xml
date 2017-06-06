@@ -48,6 +48,7 @@
       <RootProperty Name="Children" />
     </RootType>
     <RootType FullName="UwpSpeechRecognition.UserControlLibrary.Controls.SpeechRecognitionControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.MediaElement" />
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="FallbackValue" />
     </RootType>
