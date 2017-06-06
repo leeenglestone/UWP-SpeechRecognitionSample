@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UwpSpeechRecognition.UserControlLibrary;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using UwpSpeechRecognition.UserControlLibrary.EventArgs;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,12 +18,12 @@ namespace UwpSpeechRecognitionSample.UwpApplication
         {
             this.InitializeComponent();
 
-            this.SpeechRecognitionControl.PhraseRecognisedEvent += SpeechRecognitionControl_PhraseRecognisedEvent;
+            this.SpeechRecognitionControl.PhraseRecognisedEvent += SpeechRecognitionControl_PhraseRecognisedEventAsync;
 
             this.SpeechRecognitionControl.PassiveListeningStartedEvent += SpeechRecognitionControl_PassiveListeningStartedEventAsync;
             this.SpeechRecognitionControl.PassiveListeningStoppedEvent += SpeechRecognitionControl_PassiveListeningStoppedEvent;
 
-            this.SpeechRecognitionControl.ActiveListeningStartedEvent += SpeechRecognitionControl_ActiveListeningStartedEvent;
+            this.SpeechRecognitionControl.ActiveListeningStartedEvent += SpeechRecognitionControl_ActiveListeningStartedEventAsync;
             this.SpeechRecognitionControl.ActiveListeningStoppedEvent += SpeechRecognitionControl_ActiveListeningStoppedEvent;
         }
 
@@ -42,9 +31,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication
         {
         }
 
-        private void SpeechRecognitionControl_ActiveListeningStartedEvent(object sender, EventArgs e)
+        private async void SpeechRecognitionControl_ActiveListeningStartedEventAsync(object sender, EventArgs e)
         {
-            
+            //var dialog = new MessageDialog("Active Listening Started");
+            //await dialog.ShowAsync();
         }
 
         private void SpeechRecognitionControl_PassiveListeningStoppedEvent(object sender, EventArgs e)
@@ -53,17 +43,24 @@ namespace UwpSpeechRecognitionSample.UwpApplication
 
         private async void SpeechRecognitionControl_PassiveListeningStartedEventAsync(object sender, EventArgs e)
         {
-            var dialog = new MessageDialog("Passive Listening Started");
-            await dialog.ShowAsync();
+            //var dialog = new MessageDialog("Passive Listening Started");
+            //await dialog.ShowAsync();
         }
 
-        private void SpeechRecognitionControl_PhraseRecognisedEvent(object sender, EventArgs e)
+        private async void SpeechRecognitionControl_PhraseRecognisedEventAsync(object sender, PhraseRecognisedEventArgs e)
         {
+            if (e.RecognisedPhrase == "what time is it")
+            {
+                var dialog = new MessageDialog("The time is {DateTime.Now.ToString()");
+                await dialog.ShowAsync();
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             this.SpeechRecognitionControl.Initialise();
+
+            this.DataContext = this.SpeechRecognitionControl.ViewModel;
         }
     }
 }

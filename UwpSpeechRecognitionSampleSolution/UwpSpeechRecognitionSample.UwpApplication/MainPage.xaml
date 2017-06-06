@@ -22,7 +22,18 @@
 
         <TextBlock Style="{StaticResource PageHeadingStyle}" Text="Heading"/>
 
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Center">
+            <TextBlock Foreground="White" Text="{Binding AwakePhrase, FallbackValue='[AwakePhrase]'}" 
+                   HorizontalAlignment="Center" FontSize="30" />
+            <TextBlock Foreground="White" Text="{Binding ListeningState, FallbackValue='[ListeningState]'}" 
+                   HorizontalAlignment="Center" FontSize="30" />
+        </StackPanel>
+        
+        
+
+
         <UserControls:SpeechRecognitionControl x:Name="SpeechRecognitionControl" Grid.Row="1" Grid.ColumnSpan="2" />
+
 
     </Grid>
 
