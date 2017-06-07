@@ -21,7 +21,6 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
         SpeechRecognizer _awakeSpeechRecognizer;
         SpeechRecognizer _commandSpeechRecognizer;
-
         DispatcherTimer _activeListeningTimer;
 
         private string _awakePhrase = "Oracle";
@@ -102,8 +101,6 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
                 return;
 
             SetupActiveListeningTimer();
-
-            //ListeningState = ListeningState.PassiveListening;
         }
 
         private void SetupActiveListeningTimer()
@@ -131,13 +128,11 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
         private async Task<SpeechRecognitionCompilationResult> SetupCommandSpeechRecogniserAsync()
         {
-            //_awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
-            //await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
-
             _commandSpeechRecognizer = new SpeechRecognizer();
 
-            //var listConstraint = new SpeechRecognitionListConstraint(Phrases, "Phrases");
-            //_commandSpeechRecognizer.Constraints.Add(listConstraint);
+            // A pre defined list can be provided here
+            // var listConstraint = new SpeechRecognitionListConstraint(Phrases, "Phrases");
+            // _commandSpeechRecognizer.Constraints.Add(listConstraint);
 
             var result = await _commandSpeechRecognizer.CompileConstraintsAsync();
             _commandSpeechRecognizer.HypothesisGenerated += _commandSpeechRecognizer_HypothesisGenerated;
@@ -147,7 +142,6 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
         private void _commandSpeechRecognizer_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
         {
-            //throw new NotImplementedException();
         }
 
         private void _commandSpeechRecognizer_HypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
@@ -156,8 +150,7 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
             var eventArgs = new PhraseRecognisedEventArgs();
             eventArgs.RecognisedPhrase = args.Hypothesis.Text;
-
-            //CommandPhraseRecognised(this, eventArgs);
+            Helpers.UiHelper.RunOnCoreDispatcherIfPossible(() => CommandPhraseRecognised(this, eventArgs), false);
         }
 
 
@@ -171,16 +164,16 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
         private async Task WakeUpAndListen()
         {
-            // Stop awake listener
+            // Stop passive listeing for awake command
             await _awakeSpeechRecognizer.ContinuousRecognitionSession.CancelAsync();
+            PassiveListeningStoppedEvent(this, null);
 
+            // Start active listening for command phrase
             await _commandSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
-
+            ActiveListeningStartedEvent(this, null);
             ListeningState = ListeningState.ActiveListening;
 
-            PassiveListeningStoppedEvent(this, null);
-            ActiveListeningStartedEvent(this, null);
-
+            // Only wait for command for a certain period, then go back to passive listening
             _activeListeningTimer.Start();
         }
 
@@ -209,7 +202,6 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
             catch { }
 
             Task.Delay(TimeSpan.FromSeconds(2)).Wait();
-
         }
 
         private async Task<bool> CheckForMicrophonePermission()

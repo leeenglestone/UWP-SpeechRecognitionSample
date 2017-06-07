@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UwpSpeechRecognition.UserControlLibrary.EventArgs;
 using UwpSpeechRecognition.UserControlLibrary.Models;
 using Windows.UI.Xaml;
@@ -14,10 +10,8 @@ namespace UwpSpeechRecognition.UserControlLibrary.Controls
     {
         public event EventHandler ActiveListeningStartedEvent;
         public event EventHandler ActiveListeningStoppedEvent;
-
         public event EventHandler PassiveListeningStartedEvent;
         public event EventHandler PassiveListeningStoppedEvent;
-
         public event EventHandler<PhraseRecognisedEventArgs> PhraseRecognisedEvent;
 
         private SpeechRecognitionViewModel _viewModel = new SpeechRecognitionViewModel();
@@ -39,14 +33,11 @@ namespace UwpSpeechRecognition.UserControlLibrary.Controls
 
         private void SpeechRecognitionControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //ViewModel.Initialize();
-
             ViewModel.CommandPhraseRecognised += RecognisedPhraseEvent;
             ViewModel.ActiveListeningStartedEvent += ViewModel_ActiveListeningStartedEvent;
             ViewModel.ActiveListeningStoppedEvent += ViewModel_ActiveListeningStoppedEvent;
             ViewModel.PassiveListeningStartedEvent += ViewModel_PassiveListeningStartedEvent;
             ViewModel.PassiveListeningStoppedEvent += ViewModel_PassiveListeningStoppedEvent;
-
         }
 
         private void ViewModel_PassiveListeningStoppedEvent(object sender, System.EventArgs e)

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
@@ -54,7 +52,7 @@ namespace UwpSpeechRecognition.UserControlLibrary.Helpers
 
             if (dispatcher != null)
             {
-                await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { action.Invoke(); });
+                await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { action.Invoke(); });
             }
             else if (runAnyway)
             {

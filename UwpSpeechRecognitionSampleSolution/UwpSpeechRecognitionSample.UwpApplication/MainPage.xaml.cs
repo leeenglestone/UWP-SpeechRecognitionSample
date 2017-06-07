@@ -1,20 +1,15 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using UwpSpeechRecognition.UserControlLibrary.EventArgs;
 using Windows.Media.SpeechSynthesis;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace UwpSpeechRecognitionSample.UwpApplication
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -50,28 +45,33 @@ namespace UwpSpeechRecognitionSample.UwpApplication
 
         private async void SpeechRecognitionControl_PhraseRecognisedEventAsync(object sender, PhraseRecognisedEventArgs e)
         {
-            if (e.RecognisedPhrase == "what time is it")
+
+            if (new[] { "what's your name" }.Contains(e.RecognisedPhrase))
             {
-                var dialog = new MessageDialog("The time is {DateTime.Now.ToString()");
-                await dialog.ShowAsync();
+                // Put a bit of a wait here
+                Task.Delay(TimeSpan.FromSeconds(2)).Wait();
+
+                Speak($"You can call me {SpeechRecognitionControl.ViewModel.AwakePhrase}");
+            }
+            else if (new[] { "what's the date", "what's todays date", "what's the date today" }.Contains(e.RecognisedPhrase))
+            {
+                //Speak("How should I know?");
+
+                Speak("Today is the 7th June");
             }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             this.SpeechRecognitionControl.Initialise();
-
             this.DataContext = this.SpeechRecognitionControl.ViewModel;
-
-            Speak();
-
         }
 
-        private async void Speak()
+        private async void Speak(string phrase)
         {
             MediaElement mediaElement = this.mediaElement;
             var _speechSynthesizer = new SpeechSynthesizer();
-            SpeechSynthesisStream stream = await _speechSynthesizer.SynthesizeTextToStreamAsync("Initialising speech synthesis");
+            SpeechSynthesisStream stream = await _speechSynthesizer.SynthesizeTextToStreamAsync(phrase);
             mediaElement.SetSource(stream, stream.ContentType);
             mediaElement.Play();
         }
