@@ -153,7 +153,6 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
             Helpers.UiHelper.RunOnCoreDispatcherIfPossible(() => CommandPhraseRecognised(this, eventArgs), false);
         }
 
-
         private void AwakeContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
         {
             if (args.Result.Confidence == SpeechRecognitionConfidence.High || args.Result.Confidence == SpeechRecognitionConfidence.Medium)

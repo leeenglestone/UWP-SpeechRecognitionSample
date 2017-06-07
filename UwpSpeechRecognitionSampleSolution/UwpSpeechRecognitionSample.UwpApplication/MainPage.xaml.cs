@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using UwpSpeechRecognition.UserControlLibrary.EventArgs;
+using UwpSpeechRecognition.UserControlLibrary.Helpers;
 using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,38 +15,31 @@ namespace UwpSpeechRecognitionSample.UwpApplication
         {
             this.InitializeComponent();
 
-            this.SpeechRecognitionControl.PhraseRecognisedEvent += SpeechRecognitionControl_PhraseRecognisedEventAsync;
-
             this.SpeechRecognitionControl.PassiveListeningStartedEvent += SpeechRecognitionControl_PassiveListeningStartedEventAsync;
             this.SpeechRecognitionControl.PassiveListeningStoppedEvent += SpeechRecognitionControl_PassiveListeningStoppedEvent;
-
             this.SpeechRecognitionControl.ActiveListeningStartedEvent += SpeechRecognitionControl_ActiveListeningStartedEventAsync;
             this.SpeechRecognitionControl.ActiveListeningStoppedEvent += SpeechRecognitionControl_ActiveListeningStoppedEvent;
+            this.SpeechRecognitionControl.PhraseRecognisedEvent += SpeechRecognitionControl_PhraseRecognisedEventAsync;
         }
 
         private void SpeechRecognitionControl_ActiveListeningStoppedEvent(object sender, EventArgs e)
         {
         }
 
-        private async void SpeechRecognitionControl_ActiveListeningStartedEventAsync(object sender, EventArgs e)
+        private void SpeechRecognitionControl_ActiveListeningStartedEventAsync(object sender, EventArgs e)
         {
-            //var dialog = new MessageDialog("Active Listening Started");
-            //await dialog.ShowAsync();
         }
 
         private void SpeechRecognitionControl_PassiveListeningStoppedEvent(object sender, EventArgs e)
         {
         }
 
-        private async void SpeechRecognitionControl_PassiveListeningStartedEventAsync(object sender, EventArgs e)
+        private void SpeechRecognitionControl_PassiveListeningStartedEventAsync(object sender, EventArgs e)
         {
-            //var dialog = new MessageDialog("Passive Listening Started");
-            //await dialog.ShowAsync();
         }
 
-        private async void SpeechRecognitionControl_PhraseRecognisedEventAsync(object sender, PhraseRecognisedEventArgs e)
+        private void SpeechRecognitionControl_PhraseRecognisedEventAsync(object sender, PhraseRecognisedEventArgs e)
         {
-
             if (new[] { "what's your name" }.Contains(e.RecognisedPhrase))
             {
                 // Put a bit of a wait here
@@ -58,6 +52,10 @@ namespace UwpSpeechRecognitionSample.UwpApplication
                 //Speak("How should I know?");
 
                 Speak("Today is the 7th June");
+            }
+            else if (new[] { "what time is it", "what's the time" }.Contains(e.RecognisedPhrase))
+            {
+                Speak("The time is " + DateTimeHelper.ToHumanReadableTime(DateTime.Now));
             }
         }
 

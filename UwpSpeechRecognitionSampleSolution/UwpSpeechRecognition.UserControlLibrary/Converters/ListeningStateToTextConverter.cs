@@ -8,8 +8,7 @@ namespace UwpSpeechRecognition.UserControlLibrary.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            ListeningState listeningState = (ListeningState)Enum.Parse(typeof(ListeningState), value.ToString());
-            return listeningState;
+            return (ListeningState)Enum.Parse(typeof(ListeningState), value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

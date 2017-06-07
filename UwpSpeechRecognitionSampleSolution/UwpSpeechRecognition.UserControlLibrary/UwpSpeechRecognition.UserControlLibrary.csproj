@@ -107,6 +107,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Converters\ListeningStateToTextConverter.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\NumberHelper.cs" />
     <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Enums\ListeningState.cs" />
     <Compile Include="EventArgs\PhraseRecognisedEventArgs.cs" />
