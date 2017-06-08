@@ -72,9 +72,14 @@ namespace UwpSpeechRecognition.UserControlLibrary.Controls
             ViewModel.Initialize();
         }
 
-        public void AddPhrases(string[] phrases)
+        public void Initialise(string awakePhrase)
         {
-            ViewModel.AddPhrases(phrases);
+            ViewModel.Initialize(awakePhrase);
         }
+
+        //public void AddPhrases(string[] phrases)
+        //{
+        //    ViewModel.AddPhrases(phrases);
+        //}
     }
 }
