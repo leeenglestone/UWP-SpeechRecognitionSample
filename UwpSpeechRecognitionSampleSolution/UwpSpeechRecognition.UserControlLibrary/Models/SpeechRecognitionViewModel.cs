@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UwpSpeechRecognition.UserControlLibrary.Enums;
 using UwpSpeechRecognition.UserControlLibrary.EventArgs;
 using Windows.Media.Capture;
 using Windows.Media.SpeechRecognition;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 
 namespace UwpSpeechRecognition.UserControlLibrary.Models
@@ -18,6 +20,8 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
         public event EventHandler ActiveListeningStoppedEvent;
         public event EventHandler PassiveListeningStartedEvent;
         public event EventHandler PassiveListeningStoppedEvent;
+
+        private CoreDispatcher _dispatcher;
 
         SpeechRecognizer _awakeSpeechRecognizer;
         SpeechRecognizer _commandSpeechRecognizer;
@@ -91,11 +95,13 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
         {
             AwakePhrase = awakePhrase;
 
-            Initialize();
+            await Initialize();
         }
 
         public async Task Initialize()
         {
+            _dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+
             if (!(await CheckForMicrophonePermission()))
                 return;
 
@@ -119,13 +125,15 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
 
         private async Task<SpeechRecognitionCompilationResult> SetupAwakeSpeechRecogniserAsync()
         {
-            _awakeSpeechRecognizer = new SpeechRecognizer();
+            _awakeSpeechRecognizer = new SpeechRecognizer(SpeechRecognizer.SystemSpeechLanguage);
 
             _awakeSpeechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<String>() { AwakePhrase }, "Awake"));
             var result = await _awakeSpeechRecognizer.CompileConstraintsAsync();
 
             _awakeSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += AwakeContinuousRecognitionSession_ResultGenerated;
-            await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync(SpeechContinuousRecognitionMode.Default);
+            _awakeSpeechRecognizer.ContinuousRecognitionSession.Completed += AwakeContinuousRecognitionSession_CompletedAsync;
+            _awakeSpeechRecognizer.StateChanged += _awakeSpeechRecognizer_StateChanged;
+            await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
 
             ListeningState = ListeningState.PassiveListening;
             PassiveListeningStartedEvent(this, null);
@@ -133,18 +141,52 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
             return result;
         }
 
+        private void _awakeSpeechRecognizer_StateChanged(SpeechRecognizer sender, SpeechRecognizerStateChangedEventArgs args)
+        {
+            Debug.WriteLine(args.State.ToString());
+        }
+
+        private async void AwakeContinuousRecognitionSession_CompletedAsync(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionCompletedEventArgs args)
+        {
+            if (_awakeSpeechRecognizer.State == SpeechRecognizerState.Idle)
+            {
+                await _awakeSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
+            }
+        }
+
         private async Task<SpeechRecognitionCompilationResult> SetupCommandSpeechRecogniserAsync()
         {
-            _commandSpeechRecognizer = new SpeechRecognizer();
+            _commandSpeechRecognizer = new SpeechRecognizer(SpeechRecognizer.SystemSpeechLanguage);
 
             // A pre defined list can be provided here
             // var listConstraint = new SpeechRecognitionListConstraint(Phrases, "Phrases");
             // _commandSpeechRecognizer.Constraints.Add(listConstraint);
 
             var result = await _commandSpeechRecognizer.CompileConstraintsAsync();
+            //_commandSpeechRecognizer.Timeouts.BabbleTimeout = TimeSpan.FromMinutes(30);
+            //_commandSpeechRecognizer.Timeouts.InitialSilenceTimeout = TimeSpan.FromMinutes(30);
+            //_commandSpeechRecognizer.Timeouts.EndSilenceTimeout = TimeSpan.FromMinutes(30);
             _commandSpeechRecognizer.HypothesisGenerated += _commandSpeechRecognizer_HypothesisGenerated;
+            _commandSpeechRecognizer.ContinuousRecognitionSession.Completed += CommandContinuousRecognitionSession_Completed;
             _commandSpeechRecognizer.ContinuousRecognitionSession.ResultGenerated += _commandSpeechRecognizer_ResultGenerated;
+            _commandSpeechRecognizer.StateChanged += _commandSpeechRecognizer_StateChanged;
+
             return result;
+        }
+
+        private void _commandSpeechRecognizer_StateChanged(SpeechRecognizer sender, SpeechRecognizerStateChangedEventArgs args)
+        {
+            Debug.WriteLine(args.State.ToString());
+        }
+
+        private async void CommandContinuousRecognitionSession_Completed(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionCompletedEventArgs args)
+        {
+            // I'm not sure if I should need the completed event but for some reason, the microphone stops listening..
+
+            if (_commandSpeechRecognizer.State == SpeechRecognizerState.Idle)
+            {
+                await _commandSpeechRecognizer.ContinuousRecognitionSession.StartAsync();
+            }
         }
 
         private void _commandSpeechRecognizer_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)

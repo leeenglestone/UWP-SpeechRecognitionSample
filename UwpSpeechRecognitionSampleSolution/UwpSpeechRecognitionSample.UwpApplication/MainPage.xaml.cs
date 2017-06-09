@@ -61,7 +61,7 @@ namespace UwpSpeechRecognitionSample.UwpApplication
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.SpeechRecognitionControl.Initialise();
+            this.SpeechRecognitionControl.Initialise("Dashboard");
             this.DataContext = this.SpeechRecognitionControl.ViewModel;
         }
 
