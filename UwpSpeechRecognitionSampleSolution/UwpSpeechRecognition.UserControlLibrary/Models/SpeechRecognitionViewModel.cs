@@ -26,7 +26,7 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
         private string _awakePhrase = "Oracle";
         public string AwakePhrase { get { return _awakePhrase; } set { _awakePhrase = value; NotifyPropertyChanged(); } }
 
-        public List<string> Phrases { get; set; } = new List<string>();
+        //public List<string> Phrases { get; set; } = new List<string>();
 
         private ListeningState _listeningState = ListeningState.PassiveListening;
         public ListeningState ListeningState
@@ -61,10 +61,10 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
             }
         }
 
-        internal void AddPhrases(string[] phrases)
-        {
-            Phrases.AddRange(phrases);
-        }
+        //internal void AddPhrases(string[] phrases)
+        //{
+        //    Phrases.AddRange(phrases);
+        //}
 
         private string _listeningStateText = string.Empty;
         public string ListeningStateText { get { return _listeningStateText; } set { _listeningStateText = value; NotifyPropertyChanged(); } }
@@ -85,6 +85,13 @@ namespace UwpSpeechRecognition.UserControlLibrary.Models
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public async Task Initialize(string awakePhrase)
+        {
+            AwakePhrase = awakePhrase;
+
+            Initialize();
         }
 
         public async Task Initialize()
