@@ -138,15 +138,15 @@
     <Folder Include="Pages\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.0.8</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\UwpSpeechRecognitionSample.UserControlLibrary\UwpSpeechRecognitionSample.UserControlLibrary.csproj">
       <Project>{16207358-D32A-4FEA-A3DD-5B969DB9B260}</Project>
       <Name>UwpSpeechRecognitionSample.UserControlLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
-    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
