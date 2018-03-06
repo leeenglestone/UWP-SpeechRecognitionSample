@@ -7,8 +7,8 @@
     <ProjectGuid>{16207358-D32A-4FEA-A3DD-5B969DB9B260}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UwpSpeechRecognition.UserControlLibrary</RootNamespace>
-    <AssemblyName>UwpSpeechRecognition.UserControlLibrary</AssemblyName>
+    <RootNamespace>UwpSpeechRecognitionSample.UserControlLibrary</RootNamespace>
+    <AssemblyName>UwpSpeechRecognitionSample.UserControlLibrary</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>

@@ -138,9 +138,9 @@
     <Folder Include="Pages\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UwpSpeechRecognition.UserControlLibrary\UwpSpeechRecognition.UserControlLibrary.csproj">
+    <ProjectReference Include="..\UwpSpeechRecognitionSample.UserControlLibrary\UwpSpeechRecognitionSample.UserControlLibrary.csproj">
       <Project>{16207358-D32A-4FEA-A3DD-5B969DB9B260}</Project>
-      <Name>UwpSpeechRecognition.UserControlLibrary</Name>
+      <Name>UwpSpeechRecognitionSample.UserControlLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
